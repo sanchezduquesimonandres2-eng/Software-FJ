@@ -1,0 +1,1656 @@
+2026-11-20 22:14:04,355 | INFO | Sistema Software FJ iniciado correctamente.
+2026-11-20 22:14:27,921 | INFO | Cliente registrado: Simon Sanchez
+2026-11-20 22:14:27,922 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:14:27,927 | INFO | Cliente registrado: Maria Lopez
+2026-11-20 22:14:27,928 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:27,930 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:27,942 | INFO | Servicio registrado: Sala de reuniones
+2026-11-20 22:14:27,943 | INFO | Servicio registrado: Computador portatil
+2026-11-20 22:14:27,944 | INFO | Servicio registrado: Asesoria informatica
+2026-11-20 22:14:27,944 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:14:27,957 | INFO | Reserva creada: R001
+2026-11-20 22:14:27,959 | INFO | Reserva R001 confirmada. Costo: $107,100.00
+2026-11-20 22:14:27,960 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:27,962 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:27,965 | INFO | Reserva creada: R002
+2026-11-20 22:14:27,966 | ERROR | Error al confirmar reserva: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:14:27,974 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 442, in reserva_no_disponible
+    self.confirmar_reserva("R002")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:14:27,978 | INFO | Reserva R001 cancelada.
+2026-11-20 22:14:27,979 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:27,981 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:27,988 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:14:27,991 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:14:27,995 | INFO | Demostracion terminada. Exitosas: 9. Fallidas: 8.
+2026-11-20 22:14:50,912 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,913 | ERROR | Prueba 1 fallida: Registro de cliente valido: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 292, in <lambda>
+    lambda: self.registrar_cliente(cliente1)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,916 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:14:50,926 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,928 | ERROR | Prueba 3 fallida: Registro de segundo cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 323, in <lambda>
+    lambda: self.registrar_cliente(cliente2)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,930 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,940 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:14:50,943 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,946 | ERROR | Prueba 5 fallida: Creacion de servicio de reserva de salas: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 352, in <lambda>
+    lambda: self.registrar_servicio(sala)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,949 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,951 | ERROR | Prueba 6 fallida: Creacion de servicio de alquiler de equipos: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 366, in <lambda>
+    lambda: self.registrar_servicio(equipo)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,956 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,958 | ERROR | Prueba 7 fallida: Creacion de servicio de asesoria: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 380, in <lambda>
+    lambda: self.registrar_servicio(asesoria)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:14:50,963 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:14:50,966 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:14:50,968 | ERROR | Prueba 9 fallida: Creacion de reserva valida: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 400, in reserva_correcta
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+    ...<2 lines>...
+        2
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:14:50,973 | ERROR | Error al confirmar reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:14:50,977 | ERROR | Prueba 10 fallida: Confirmacion de reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 417, in <lambda>
+    lambda: self.confirmar_reserva(
+            ~~~~~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+        impuesto=19,
+        ^^^^^^^^^^^^
+        descuento=10
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:14:50,980 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:50,981 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:50,984 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:14:50,985 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 435, in reserva_no_disponible
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R002",
+        ^^^^^^^
+    ...<2 lines>...
+        3
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:14:50,989 | ERROR | Error al cancelar reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:14:50,991 | ERROR | Prueba 13 fallida: Cancelacion de reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 454, in <lambda>
+    lambda: self.cancelar_reserva("R001")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:14:50,993 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:50,996 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:14:50,999 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:14:51,001 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:14:51,005 | INFO | Demostracion terminada. Exitosas: 1. Fallidas: 16.
+2026-11-20 22:22:11,442 | INFO | Sistema Software FJ iniciado correctamente.
+2026-11-20 22:22:17,172 | INFO | Cliente registrado: Simon Sanchez
+2026-11-20 22:22:17,173 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:22:17,189 | INFO | Cliente registrado: Maria Lopez
+2026-11-20 22:22:17,191 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:17,193 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:17,200 | INFO | Servicio registrado: Sala de reuniones
+2026-11-20 22:22:17,200 | INFO | Servicio registrado: Computador portatil
+2026-11-20 22:22:17,203 | INFO | Servicio registrado: Asesoria informatica
+2026-11-20 22:22:17,205 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:22:17,208 | INFO | Reserva creada: R001
+2026-11-20 22:22:17,210 | INFO | Reserva R001 confirmada. Costo: $107,100.00
+2026-11-20 22:22:17,214 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:17,217 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:17,220 | INFO | Reserva creada: R002
+2026-11-20 22:22:17,221 | ERROR | Error al confirmar reserva: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:22:17,233 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 442, in reserva_no_disponible
+    self.confirmar_reserva("R002")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:22:17,238 | INFO | Reserva R001 cancelada.
+2026-11-20 22:22:17,241 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:17,250 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:17,253 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:22:17,256 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:22:17,266 | INFO | Demostracion terminada. Exitosas: 9. Fallidas: 8.
+2026-11-20 22:22:22,890 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,891 | ERROR | Prueba 1 fallida: Registro de cliente valido: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 292, in <lambda>
+    lambda: self.registrar_cliente(cliente1)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,893 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:22:22,895 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,898 | ERROR | Prueba 3 fallida: Registro de segundo cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 323, in <lambda>
+    lambda: self.registrar_cliente(cliente2)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,901 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,905 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:22,908 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,909 | ERROR | Prueba 5 fallida: Creacion de servicio de reserva de salas: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 352, in <lambda>
+    lambda: self.registrar_servicio(sala)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,921 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,922 | ERROR | Prueba 6 fallida: Creacion de servicio de alquiler de equipos: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 366, in <lambda>
+    lambda: self.registrar_servicio(equipo)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,924 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,925 | ERROR | Prueba 7 fallida: Creacion de servicio de asesoria: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 380, in <lambda>
+    lambda: self.registrar_servicio(asesoria)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:22,931 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:22:22,934 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:22,935 | ERROR | Prueba 9 fallida: Creacion de reserva valida: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 400, in reserva_correcta
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+    ...<2 lines>...
+        2
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:22,937 | ERROR | Error al confirmar reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:22:22,940 | ERROR | Prueba 10 fallida: Confirmacion de reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 417, in <lambda>
+    lambda: self.confirmar_reserva(
+            ~~~~~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+        impuesto=19,
+        ^^^^^^^^^^^^
+        descuento=10
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:22:22,942 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:22,944 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:22,949 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:22,951 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 435, in reserva_no_disponible
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R002",
+        ^^^^^^^
+    ...<2 lines>...
+        3
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:22,954 | ERROR | Error al cancelar reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:22:22,955 | ERROR | Prueba 13 fallida: Cancelacion de reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 454, in <lambda>
+    lambda: self.cancelar_reserva("R001")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:22:22,958 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:22,961 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:22,965 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:22:22,968 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:22:22,970 | INFO | Demostracion terminada. Exitosas: 1. Fallidas: 16.
+2026-11-20 22:22:25,857 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,858 | ERROR | Prueba 1 fallida: Registro de cliente valido: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 292, in <lambda>
+    lambda: self.registrar_cliente(cliente1)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,860 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:22:25,864 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,866 | ERROR | Prueba 3 fallida: Registro de segundo cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 323, in <lambda>
+    lambda: self.registrar_cliente(cliente2)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,869 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,871 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:22:25,873 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,874 | ERROR | Prueba 5 fallida: Creacion de servicio de reserva de salas: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 352, in <lambda>
+    lambda: self.registrar_servicio(sala)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,877 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,885 | ERROR | Prueba 6 fallida: Creacion de servicio de alquiler de equipos: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 366, in <lambda>
+    lambda: self.registrar_servicio(equipo)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,888 | ERROR | Error al registrar servicio: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,890 | ERROR | Prueba 7 fallida: Creacion de servicio de asesoria: Ya existe un servicio con ese identificador.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 380, in <lambda>
+    lambda: self.registrar_servicio(asesoria)
+            ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 78, in registrar_servicio
+    raise DatosInvalidosError(
+        "Ya existe un servicio con ese identificador."
+    )
+excepciones.DatosInvalidosError: Ya existe un servicio con ese identificador.
+2026-11-20 22:22:25,891 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:22:25,895 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:25,900 | ERROR | Prueba 9 fallida: Creacion de reserva valida: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 400, in reserva_correcta
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+    ...<2 lines>...
+        2
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:25,902 | ERROR | Error al confirmar reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:22:25,904 | ERROR | Prueba 10 fallida: Confirmacion de reserva: No se puede confirmar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 417, in <lambda>
+    lambda: self.confirmar_reserva(
+            ~~~~~~~~~~~~~~~~~~~~~~^
+        "R001",
+        ^^^^^^^
+        impuesto=19,
+        ^^^^^^^^^^^^
+        descuento=10
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 74, in confirmar
+    raise OperacionNoPermitidaError(
+        "No se puede confirmar una reserva cancelada."
+    )
+excepciones.OperacionNoPermitidaError: No se puede confirmar una reserva cancelada.
+2026-11-20 22:22:25,907 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:25,909 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:25,911 | ERROR | Error al crear reserva: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:25,914 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: El identificador de reserva ya existe.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 435, in reserva_no_disponible
+    self.crear_reserva(
+    ~~~~~~~~~~~~~~~~~~^
+        "R002",
+        ^^^^^^^
+    ...<2 lines>...
+        3
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 129, in crear_reserva
+    raise ReservaInvalidaError(
+        "El identificador de reserva ya existe."
+    )
+excepciones.ReservaInvalidaError: El identificador de reserva ya existe.
+2026-11-20 22:22:25,917 | ERROR | Error al cancelar reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:22:25,920 | ERROR | Prueba 13 fallida: Cancelacion de reserva: La reserva ya esta cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 454, in <lambda>
+    lambda: self.cancelar_reserva("R001")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 184, in cancelar_reserva
+    reserva.cancelar()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 119, in cancelar
+    raise OperacionNoPermitidaError(
+        "La reserva ya esta cancelada."
+    )
+excepciones.OperacionNoPermitidaError: La reserva ya esta cancelada.
+2026-11-20 22:22:25,922 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:25,924 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:22:25,933 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:22:25,936 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:22:25,939 | INFO | Demostracion terminada. Exitosas: 1. Fallidas: 16.
+2026-11-20 22:37:54,326 | INFO | Sistema Software FJ iniciado correctamente.
+2026-11-20 22:37:56,602 | INFO | Cliente registrado: Simon Sanchez
+2026-11-20 22:37:56,603 | ERROR | Prueba 2 fallida: Registro de cliente con correo invalido: El correo electronico no es valido.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 297, in cliente_invalido
+    Cliente(
+    ~~~~~~~^
+        "C002",
+        ^^^^^^^
+    ...<3 lines>...
+        "3001234568"
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 21, in __init__
+    self.__correo = self.__validar_correo(correo)
+                    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\clientes.py", line 59, in __validar_correo
+    raise DatosInvalidosError("El correo electronico no es valido.")
+excepciones.DatosInvalidosError: El correo electronico no es valido.
+2026-11-20 22:37:56,607 | INFO | Cliente registrado: Maria Lopez
+2026-11-20 22:37:56,607 | ERROR | Error al registrar cliente: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:37:56,609 | ERROR | Prueba 4 fallida: Deteccion de cliente duplicado: Ya existe un cliente con ese documento.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 338, in <lambda>
+    lambda: self.registrar_cliente(cliente_duplicado)
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 46, in registrar_cliente
+    raise ClienteExistenteError(
+        "Ya existe un cliente con ese documento."
+    )
+excepciones.ClienteExistenteError: Ya existe un cliente con ese documento.
+2026-11-20 22:37:56,614 | INFO | Servicio registrado: Sala de reuniones
+2026-11-20 22:37:56,615 | INFO | Servicio registrado: Computador portatil
+2026-11-20 22:37:56,616 | INFO | Servicio registrado: Asesoria informatica
+2026-11-20 22:37:56,616 | ERROR | Prueba 8 fallida: Creacion de servicio con parametros incorrectos: La tarifa debe ser mayor que cero.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 385, in servicio_invalido
+    ReservaSala(
+    ~~~~~~~~~~~^
+        "S004",
+        ^^^^^^^
+    ...<2 lines>...
+        0
+        ^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 119, in __init__
+    super().__init__(identificador, nombre, tarifa, disponible)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 30, in __init__
+    raise DatosInvalidosError("La tarifa debe ser mayor que cero.")
+excepciones.DatosInvalidosError: La tarifa debe ser mayor que cero.
+2026-11-20 22:37:56,625 | INFO | Reserva creada: R001
+2026-11-20 22:37:56,626 | INFO | Reserva R001 confirmada. Costo: $107,100.00
+2026-11-20 22:37:56,627 | ERROR | Error al confirmar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:37:56,629 | ERROR | Prueba 11 fallida: Confirmacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 428, in <lambda>
+    lambda: self.confirmar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 160, in confirmar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:37:56,633 | INFO | Reserva creada: R002
+2026-11-20 22:37:56,634 | ERROR | Error al confirmar reserva: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:37:56,638 | ERROR | Prueba 12 fallida: Intento de reserva con servicio no disponible: No se puede confirmar porque el servicio no esta disponible.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 84, in confirmar
+    self.__servicio.validar_disponibilidad()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 59, in validar_disponibilidad
+    raise ServicioNoDisponibleError(
+        f"El servicio {self.__nombre} no esta disponible."
+    )
+excepciones.ServicioNoDisponibleError: El servicio Computador portatil no esta disponible.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 442, in reserva_no_disponible
+    self.confirmar_reserva("R002")
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 162, in confirmar_reserva
+    costo = reserva.confirmar(impuesto, descuento)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 98, in confirmar
+    raise ReservaInvalidaError(
+        "No se puede confirmar porque el servicio no esta disponible."
+    ) from error
+excepciones.ReservaInvalidaError: No se puede confirmar porque el servicio no esta disponible.
+2026-11-20 22:37:56,644 | INFO | Reserva R001 cancelada.
+2026-11-20 22:37:56,645 | ERROR | Error al cancelar reserva: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:37:56,648 | ERROR | Prueba 14 fallida: Cancelacion de reserva inexistente: No existe la reserva R999.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 461, in <lambda>
+    lambda: self.cancelar_reserva("R999")
+            ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 183, in cancelar_reserva
+    reserva = self.__buscar_reserva(identificador)
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 206, in __buscar_reserva
+    raise ReservaInvalidaError(
+        f"No existe la reserva {identificador}."
+    )
+excepciones.ReservaInvalidaError: No existe la reserva R999.
+2026-11-20 22:37:56,652 | ERROR | Prueba 16 fallida: Calculo con impuesto invalido: El impuesto debe estar entre 0 y 100.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 483, in <lambda>
+    lambda: sala.calcular_costo(
+            ~~~~~~~~~~~~~~~~~~~^
+        2,
+        ^^
+        impuesto=150
+        ^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\servicios.py", line 86, in calcular_costo
+    raise CalculoInvalidoError("El impuesto debe estar entre 0 y 100.")
+excepciones.CalculoInvalidoError: El impuesto debe estar entre 0 y 100.
+2026-11-20 22:37:56,654 | ERROR | Prueba 17 fallida: Procesamiento de reserva cancelada: No se puede procesar una reserva cancelada.
+Traceback (most recent call last):
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 263, in ejecutar
+    operacion()
+    ~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\main.py", line 493, in <lambda>
+    lambda: self.__buscar_reserva("R001").procesar()
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Simon\Desktop\SOFTWARE_FJ\reservas.py", line 130, in procesar
+    raise ReservaInvalidaError(
+        "No se puede procesar una reserva cancelada."
+    )
+excepciones.ReservaInvalidaError: No se puede procesar una reserva cancelada.
+2026-11-20 22:37:56,658 | INFO | Demostracion terminada. Exitosas: 9. Fallidas: 8.
